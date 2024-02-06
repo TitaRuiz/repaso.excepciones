@@ -1,8 +1,10 @@
 package com.corenetworks.repaso.excepciones.controlador;
 
+import com.corenetworks.repaso.excepciones.dto.ProductoDTO;
 import com.corenetworks.repaso.excepciones.excepciones.ExcepcionPersonalizadaNoEncontrado;
 import com.corenetworks.repaso.excepciones.modelo.Producto;
 import com.corenetworks.repaso.excepciones.servicio.IProductoServicio;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,9 @@ public class ProductoControlador {
     @Autowired
     private IProductoServicio servicio;
     @PostMapping
-    public ResponseEntity<Producto> insertar(@RequestBody Producto p) throws Exception{
-        Producto p1 = servicio.insertar(p);
-        return new ResponseEntity<>(p1, HttpStatus.CREATED);
+    public ResponseEntity<ProductoDTO> insertar(@Valid @RequestBody ProductoDTO p) throws Exception{
+        System.out.println(p.toString());
+        return new ResponseEntity<>(p, HttpStatus.CREATED);
     }
 
     @PutMapping
